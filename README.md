@@ -3,5 +3,5 @@ This repository contains all the files, notes and programs that I created while 
 
 This repo focuses on both frontend and backend Web Development. I have also added some of my code and notes to this repository along with notes that are provided by the courses that I have taken down the road. This repo also contains questions and challenges that have helped me to strengthen my concepts.
 
-Resource: 1. https://www.appbrewery.co/p/web-development-course-resources:-
-          2. https://developer.mozilla.org/en-US/
+Resource: :- 1. https://www.appbrewery.co/p/web-development-course-resources
+          :- 2. https://developer.mozilla.org/en-US/
