@@ -1,5 +1,5 @@
 var randomNumber1 = Math.random(); // chooses any random number from 0.01 - 0.9999 (max 16 digits)
-randomNumber1 = randomNumber1 * 6 + 1; // addd 1 to include 6
+randomNumber1 = (randomNumber1 * 6) + 1; // addd 1 to include 6
 randomNumber1 = Math.floor(randomNumber1); // round to the nearest whole number
 
 let img1 = document.getElementsByClassName('img1')[0];
