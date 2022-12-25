@@ -15,6 +15,32 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+// HOME
+app.get("/", function(req, res){
+  res.render("home", {startingContent: homeStartingContent});
+});
+
+// ABOUT
+app.get("/about",  function(req, res){
+  res.render("about", {abtContent: aboutContent});
+});
+
+// CONTACT
+app.get("/contact", function(req,res) {
+  res.render("contact", {cntContent: contactContent});
+});
+
+// COMPOSE
+app.get("/compose", function(req, res) {
+  res.render("compose");
+});
+
+app.post("/compose", function(req, res) {
+  const data = {
+    TITLE: req.body.titlePublish,
+    POST: req.body.postBody
+  };
+});
 
 
 
@@ -24,10 +50,6 @@ app.use(express.static("public"));
 
 
 
-
-
-
-
-app.listen(3000, function() {
-  console.log("Server started on port 3000");
+app.listen(8080, function() {
+  console.log("Server started on port 8080");
 });
