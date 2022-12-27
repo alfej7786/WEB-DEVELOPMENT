@@ -3,4 +3,10 @@
 <h1>Home</h1>
 <p> <%= startingContent %> </p>
 
+<% gblData.forEach(function(data){ %>
+    <h1> <%= data.TITLE %> </h1>
+    <p> <%= data.POST %> </p>
+    <% }) %>
+
+
 <%- include("partials/footer") -%>

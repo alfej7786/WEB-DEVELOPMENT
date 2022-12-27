@@ -10,6 +10,8 @@ const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rho
 
 const app = express();
 
+let gblData = [];
+
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -17,7 +19,10 @@ app.use(express.static("public"));
 
 // HOME
 app.get("/", function(req, res){
-  res.render("home", {startingContent: homeStartingContent});
+  res.render("home", {
+    startingContent: homeStartingContent, 
+    gblData: gblData
+  });
 });
 
 // ABOUT
@@ -40,9 +45,25 @@ app.post("/compose", function(req, res) {
     TITLE: req.body.titlePublish,
     POST: req.body.postBody
   };
+  gblData.push(data);
+  res.redirect("/");
 });
 
+//
+app.get('/posts/:postName', function(req, res) {
+  const requestedTitle = req.params.postName;
 
+  // forEach loop
+  gblData.forEach(function(data) {
+    const storedTitle = data.TITLE;
+  
+    if(requestedTitle === storedTitle) {
+      console.log("Match Found!");
+    } else {
+      console.log("No Match Found!");
+    }
+  });
+});
 
 
 
