@@ -33,7 +33,12 @@ const item3 = new Item({
 
 const defaultItems = [item1, item2, item3];
 
+const listSchema = {
+    name: String,
+    items: [itemSchema]
+};
 
+const List = mongoose.model("List", listSchema);
 
 
 app.get("/", function (req, res) {
@@ -59,17 +64,48 @@ app.get("/", function (req, res) {
 
 });
 
+app.get("/:customeListName", function(req,res){
+    const customeListName = req.params.customeListName;
+
+    
+    List.findOne({name : customeListName}, function(err, foundList) {
+        if(!err) {
+            if (!foundList) {
+                // Craete New List
+                const list = new List({
+                    name: customeListName,
+                    items: defaultItems
+                });
+            
+                list.save();
+                res.redirect("/");
+            } else {
+                // Show an existing List
+                res.render("list", { listTitle: foundList.name, newListItems: foundList.items })
+            }
+        }
+    });
+});
+
 app.post("/", function (req, res) {
     const itemName = req.body.newItem;
-
+    const listName = req.body.list;
     const item = new Item({
         name: itemName
     });
-    item.save();
 
-    res.redirect("/");
-
+    if (listName === "Today") {
+        item.save();
+        res.redirect("/");
+    } else {
+        List.findOne({name : listName}, function(err, foundList) {
+            foundList.items.push(item);
+            foundList.save();
+            res.redirect("/" + listName);
+        });
+    }
 });
+
 
 app.post("/delete", function(req, res) {
     const checkedItemID = req.body.checkbox;
