@@ -7,6 +7,7 @@ const encrypt = require('mongoose-encryption');
 const ejs = require('ejs');
 
 const app = express();
+console.log(process.env)
 
 
 app.use(express.static("public"));
@@ -20,8 +21,7 @@ const userSchema = new mongoose.Schema({
   password: String
 });
 
-const secret = "Thisisourlittlesecret.";
-userSchema.plugin(encrypt, {secret : secret, encryptedFields: ["password"]});
+userSchema.plugin(encrypt, {secret : process.env.SECRET, encryptedFields: ["password"]});
 
 const User = new mongoose.model("User", userSchema);
 
