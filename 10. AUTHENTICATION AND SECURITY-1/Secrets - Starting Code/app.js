@@ -28,8 +28,8 @@ app.get("/login",  function(req, res){
   res.render("login");
 })
 
-app.get("/rigister", function(req,res) {
-    res.render("rigister");
+app.get("/register", function(req,res) {
+    res.render("register");
 });
 
 app.post("/register", function(req, res){
@@ -37,7 +37,32 @@ app.post("/register", function(req, res){
     email: req.body.username,
     password: req.body.password
   });
+
+  newUser.save(function(err) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("secrets");
+    }
+  });
 })
+
+app.post("/register", function(req, res){
+    const email = req.body.username;
+    const password = req.body.password;
+
+    User.findOne({email: username} , function(err, foundUser) {
+      if (err) {
+        console.log(err);
+      } else {
+        if (foundUser) {
+          if (foundUser.password === password) {
+            res.render("secrets");
+          }
+        }
+      }
+    })
+  });
 
 
 app.listen(8080, function(){
