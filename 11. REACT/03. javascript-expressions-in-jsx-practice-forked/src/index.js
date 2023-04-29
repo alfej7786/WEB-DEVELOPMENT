@@ -5,17 +5,16 @@
 //Copyright CURRENTYEAR.
 //E.g.
 //Created by Angela Yu.
-//Copyright 2019.
+//Copyright current year.
 
 import React from "react";
 import ReactDOM from "react-dom";
 
-let year = new Date().getFullYear();
-
+var year = new Date().getFullYear();
 ReactDOM.render(
   <div>
     <p>Created by Alfej Savaya</p>
-    <p>Copyright {year}</p>
+    <p>Copyright {year} </p>
   </div>,
   document.getElementById("root")
 );
